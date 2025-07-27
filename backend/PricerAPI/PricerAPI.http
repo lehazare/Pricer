@@ -1,0 +1,8 @@
+@PricerAPI_HostAddress = http://localhost:5017
+
+POST {{PricerAPI_HostAddress}}/PriceWithBlackScholes/
+Accept: application/json
+
+POST {{PricerAPI_HostAddress}}/PriceWithMonteCarlo/
+Accept: application/json
+

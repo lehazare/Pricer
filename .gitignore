@@ -1,0 +1,56 @@
+# Root .gitignore (Fullstack: React + C#)
+
+# Node (Frontend React)
+node_modules/
+dist/
+.vite/
+
+# React env files
+.env*
+!.env.example
+
+# C# (Backend)
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VSCode & system files
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs and crash dumps
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Initial from Vite : 
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
