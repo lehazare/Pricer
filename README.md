@@ -116,9 +116,10 @@ Each pricing model will be accompanied by:
 ### 🎨 React UI Design
 - [ ] Apply black, pink, and white theme (Visual Studio-style)
 - [ ] Use Chakra UI for components (tables, buttons, inputs)
+- [ ] Parameter ESLint
 
 ### ⚙️ Backend Optimization
-- [ ] Port critical pricing logic from C# to **C++** for performance
+- [ ] Port critical pricing logic from C# to **C++** for performance and compare it.
 
 ---
 
