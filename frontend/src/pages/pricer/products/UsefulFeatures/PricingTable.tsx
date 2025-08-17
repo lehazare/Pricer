@@ -10,6 +10,13 @@ const underlyingCollection = createListCollection({
     })),
 });
 
+const currencyCollection = createListCollection({
+    items: ["EUR", "USD", "JPY", "GBP"].map((label, value) => ({
+        label,
+        value,
+    })),
+});
+
 type ColumnMeta = {
     key: string;
     label: string;
@@ -18,16 +25,16 @@ type ColumnMeta = {
     values?: ListCollection<any>;
 };
 
-const COLUMNS: ColumnMeta[] = [
-    { key: "select", label: "", type: "Checkbox", defaultValue: "CAC40" },
-    { key: "underlying", label: "Asset", type: "Select", values: underlyingCollection, defaultValue: "CAC40" },
-    { key: "nominal", label: "Nominal", type: "NumberInput", defaultValue: "1000000" },
-    { key: "barrier", label: "PDI", type: "PercentInput", defaultValue: "1" },
-    { key: "maturity", label: "Maturity", type: "NumberInput", defaultValue: "1" },
-    { key: "strike date", label: "Strike Date", type: "Input", defaultValue: "10" },
-    { key: "scheduling", label: "Scheduling", type: "SchedulingButton" },
-    { key: "Price", label: "Price", type: "Input", defaultValue: "10" },
-];
+const COLUMNS = [
+  { key: "underlying", label: "Underlying", type: "Select", values: underlyingCollection, defaultValue: "CAC40" },
+  { key: "nominal", label: "Nominal", type: "NumberInput", defaultValue: "1000000" },
+  { key: "currency", label: "Currency", type: "Select", values: currencyCollection, defaultValue: "EUR" },
+  { key: "barrier", label: "Barrière", type: "PercentInput", defaultValue: "1" },
+  { key: "maturity", label: "Maturity", type: "NumberInput", defaultValue: "1" },
+  { key: "strike date", label: "Strike Date", type: "Input", defaultValue: "10" },
+  { key: "scheduling", label: "Scheduling", type: "SchedulingButton" },
+  { key: "Price", label: "Price", type: "Input", defaultValue: "10" },
+] as ColumnMeta[];
 
 type RowData = {
     [K in typeof COLUMNS[number]["key"]]: string;
@@ -35,39 +42,25 @@ type RowData = {
 
 export default function PricingTable() {
 
-    const [rows, setRows] = useState<RowData[]>([
-        COLUMNS.reduce((acc) => {
-            return acc;
-        }, {} as RowData),
-    ]);
+    const [rows, setRows] = useState<RowData[]>([{} as RowData]);
 
     const addRow = () => {
-        const newRow = COLUMNS.reduce((acc) => {
-            return acc;
-        }, {} as RowData);
+        const newRow = {} as RowData;
         setRows([...rows, newRow]);
+        setSelection([...selection, rows.length])
     };
 
-    const updateCell = (index: number, field: keyof RowData, value: string) => {
-        const updated = [...rows];
-        updated[index][field] = value;
-        setRows(updated);
-    };
-
-    function generateInput(col: ColumnMeta, rowIndex: number, row: RowData) {
+    function generateInput(col: ColumnMeta) {
         switch (col.type) {
             case "Input":
                 return <Input
-                    value={row[col.key]}
-                    onChange={(e) =>
-                        updateCell(rowIndex, col.key, e.target.value)
-                    }
                     bg="colors.bg"
                     color="colors.white"
                     size="sm"
+                    maxW="130px"
                 />;
             case "Select":
-                return <Select.Root collection={col.values!} size="sm">
+                return <Select.Root minW="75px" collection={col.values!} size="sm">
                     <Select.HiddenSelect />
                     <Select.Control>
                         <Select.Trigger>
@@ -86,11 +79,6 @@ export default function PricingTable() {
                         </Select.Content>
                     </Select.Positioner>
                 </Select.Root>
-            case "Checkbox":
-                return <Checkbox.Root defaultChecked variant="subtle">
-                    <Checkbox.HiddenInput />
-                    <Checkbox.Control />
-                </Checkbox.Root>
             case "SchedulingButton":
                 return (
                     <Dialog.Root size="lg" placement="center">
@@ -133,6 +121,7 @@ export default function PricingTable() {
                     formatOptions={{
                         style: "percent",
                     }}
+                    maxW="130px"
                 >
                     <NumberInput.Control />
                     <NumberInput.Input />
@@ -140,6 +129,7 @@ export default function PricingTable() {
             case "NumberInput":
                 return <NumberInput.Root
                     defaultValue={col.defaultValue}
+                    maxW="130px"
                 >
                     <NumberInput.Control />
                     <NumberInput.Input />
@@ -147,6 +137,10 @@ export default function PricingTable() {
 
         }
     }
+
+    const [selection, setSelection] = useState<number[]>([0])
+
+    const indeterminate = selection.length > 0 && selection.length < rows.length
 
     return (
         <VStack>
@@ -159,6 +153,23 @@ export default function PricingTable() {
             >
                 <Table.Header bg="colors.bg">
                     <Table.Row>
+                        <Table.ColumnHeader fontWeight="bold" borderColor="colors.cyan"
+                            borderWidth="2px" color="colors.cyan" key="main-checkbox">
+                            <Checkbox.Root
+                                size="sm"
+                                mt="0.5"
+                                aria-label="Select all rows"
+                                checked={indeterminate ? "indeterminate" : selection.length > 0}
+                                onCheckedChange={(changes) => {
+                                    setSelection(
+                                        changes.checked ? rows.map((_, rowIndex) => rowIndex) : [],
+                                    )
+                                }}
+                            >
+                                <Checkbox.HiddenInput />
+                                <Checkbox.Control />
+                            </Checkbox.Root>
+                        </Table.ColumnHeader>
                         {COLUMNS.map((col) => (
                             <Table.ColumnHeader fontWeight="bold" borderColor="colors.cyan"
                                 borderWidth="2px" key={col.key} color="colors.cyan">
@@ -168,12 +179,32 @@ export default function PricingTable() {
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {rows.map((row, rowIndex) => (
-                        <Table.Row key={rowIndex}>
+                    {rows.map((_, rowIndex) => (
+                        <Table.Row key={rowIndex} >
+                            <Table.Cell borderColor="colors.cyan"
+                                borderWidth="2px" key="checkbox">
+                                <Checkbox.Root
+                                    size="sm"
+                                    mt="0.5"
+                                    aria-label="Select row"
+                                    checked={selection.includes(rowIndex)}
+                                    onCheckedChange={(changes) => {
+                                        setSelection((prev) =>
+                                            changes.checked
+                                                ? [...prev, rowIndex]
+                                                : selection.filter((name) => name !== rowIndex),
+                                        )
+                                    }}
+                                >
+                                    <Checkbox.HiddenInput />
+                                    <Checkbox.Control />
+                                </Checkbox.Root>
+                            </Table.Cell>
+
                             {COLUMNS.map((col) => (
                                 <Table.Cell borderColor="colors.cyan"
                                     borderWidth="2px" key={col.key}>
-                                    {generateInput(col, rowIndex, row)}
+                                    {generateInput(col)}
                                 </Table.Cell>
                             ))}
                         </Table.Row>
