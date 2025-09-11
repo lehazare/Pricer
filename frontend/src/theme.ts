@@ -1,4 +1,4 @@
-import { createSystem, defaultConfig } from '@chakra-ui/react'
+import { createSystem, defaultConfig, defineRecipe } from '@chakra-ui/react'
 
 const colors = {
   colors: {
@@ -16,12 +16,22 @@ const fonts = {
   body: {value : `'Fira Code', monospace`},
 }
 
+const headingRecipe = defineRecipe({
+  base: {
+    fontWeight: "normal",
+    textStyle: "4xl",
+    color: "colors.purple", 
+    },
+})
+
+
 const theme = createSystem( defaultConfig, {
         theme: {
             tokens:{
                 colors, 
-                fonts
-            }
+                fonts,
+            },
+            recipes: { heading: headingRecipe},
         }
     }
 )

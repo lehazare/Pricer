@@ -1,0 +1,18 @@
+.datePickerWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.datePickerInput {
+  width: 100%;
+  background-color: #181818ff; 
+  border: 0.1px solid #646464ff;
+  padding: 6px;
+  border-radius: 6px;
+  outline: none; 
+}
+
+.datePickerInput:focus {
+  border: 0.1px solid #bd93f9;
+}
