@@ -3,7 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import "./DatePicker.css"
 import moment from "moment";
-import type { ColumnMeta, RowData } from "./types";
+import type { ColumnMeta, RowData, SchedulingRow } from "./types";
 import SchedulingDialog from "./SchedulingDialog";
 
 type Props = {
@@ -11,9 +11,9 @@ type Props = {
   rowIndex: number;
   rows: RowData[];
   setRows: React.Dispatch<React.SetStateAction<RowData[]>>;
-  schedulingData: { [rowIndex: number]: { numberOfCoupons: number; couponDates: string[] } };
+  schedulingData: { [rowIndex: number]: SchedulingRow };
   setSchedulingData: React.Dispatch<
-    React.SetStateAction<{ [rowIndex: number]: { numberOfCoupons: number; couponDates: string[] } }>
+    React.SetStateAction<{ [rowIndex: number]: SchedulingRow }>
   >;
 };
 

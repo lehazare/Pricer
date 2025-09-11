@@ -11,3 +11,13 @@ export type ColumnMeta = {
 export type RowData = {
   [key: string]: string;
 };
+
+export type Coupon = {
+    date: string;
+    value: string;
+};
+
+export type SchedulingRow = {
+    numberOfCoupons: number;
+    coupons: Coupon[];
+};
