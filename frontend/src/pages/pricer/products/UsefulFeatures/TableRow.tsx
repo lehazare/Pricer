@@ -1,6 +1,6 @@
 import { Table, Checkbox } from "@chakra-ui/react";
 import { COLUMNS } from "./constants";
-import type { RowData } from "./types";
+import type { RowData, SchedulingRow } from "./types";
 import InputFactory from "./InputFactory";
 
 type Props = {
@@ -9,9 +9,9 @@ type Props = {
   setRows: React.Dispatch<React.SetStateAction<RowData[]>>;
   selection: number[];
   setSelection: React.Dispatch<React.SetStateAction<number[]>>;
-  schedulingData: { [rowIndex: number]: { numberOfCoupons: number; couponDates: string[] } };
+  schedulingData: { [rowIndex: number]: SchedulingRow };
   setSchedulingData: React.Dispatch<
-    React.SetStateAction<{ [rowIndex: number]: { numberOfCoupons: number; couponDates: string[] } }>
+    React.SetStateAction<{ [rowIndex: number]: SchedulingRow }>
   >;
 };
 

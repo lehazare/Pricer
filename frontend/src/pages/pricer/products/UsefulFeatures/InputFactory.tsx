@@ -22,10 +22,26 @@ export default function InputFactory({ col, rowIndex, rows, setRows, schedulingD
 
   switch (col.type) {
     case "Input":
-      return <Input bg="colors.bg" color="colors.white" size="sm" maxW="130px" />;
+      return <Input bg="colors.bg" color="colors.white" size="sm" maxW="100px" disabled value={row[col.key]} />;
     case "Select":
       return (
-        <Select.Root minW="75px" collection={col.values!} size="sm">
+        <Select.Root minW="125px" collection={col.values!} size="sm" onValueChange={async (value) => {
+          try {
+            const equityLabel = value.items.at(0).value
+            const response = await fetch(`http://localhost:5212/price/${equityLabel}`);
+            if (!response.ok) throw new Error("Erreur API");
+            const data = await response.json();
+            const price = data.spotPrice;
+
+            setRows((prev) => {
+              const newRows = [...prev];
+              newRows[rowIndex] = { ...newRows[rowIndex], spot: price };
+              return newRows;
+            });
+          } catch (error) {
+            console.error("Impossible de récupérer le prix :", error);
+          }
+        }}>
           <Select.HiddenSelect />
           <Select.Control>
             <Select.Trigger>
