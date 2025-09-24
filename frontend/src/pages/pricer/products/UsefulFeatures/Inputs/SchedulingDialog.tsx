@@ -1,7 +1,7 @@
 import { Button, Dialog, HStack, NumberInput, Portal, Text, VStack, CloseButton, For } from "@chakra-ui/react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import type { SchedulingRow } from "./types";
+import type { SchedulingRow } from "../types";
 
 type Props = {
     rowIndex: number;

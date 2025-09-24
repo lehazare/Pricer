@@ -1,12 +1,12 @@
 import { VStack, Table, Button, HStack, ActionBar, Portal } from "@chakra-ui/react";
 import { useState } from "react";
-import type { RowData } from "./types";
+import type { RowData, SchedulingRow } from "./types";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 
 export default function PricingTable() {
   const [rows, setRows] = useState<RowData[]>([{} as RowData]);
-  const [schedulingData, setSchedulingData] = useState<{ [rowIndex: number]: { numberOfCoupons: number; couponDates: string[] } }>({});
+  const [schedulingData, setSchedulingData] = useState<{ [rowIndex: number]: SchedulingRow }>({});
   const [selection, setSelection] = useState<number[]>([0]);
 
   const hasSelection = selection.length > 0;
