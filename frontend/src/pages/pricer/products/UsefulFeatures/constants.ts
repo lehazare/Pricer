@@ -22,13 +22,13 @@ export const currencyCollection = createListCollection({
 });
 
 export const COLUMNS: ColumnMeta[] = [
-  { key: "underlying", label: "Underlying", type: "Select", values: underlyingCollection, defaultValue: "SPY" },
-  { key: "spot", label: "Spot", type: "Input" },
-  { key: "nominal", label: "Nominal", type: "NumberInput", defaultValue: "1000000" },
+  { key: "underlying", label: "Underlying", values: underlyingCollection, defaultValue: "SPY" },
+  { key: "spot", label: "Spot"},
+  { key: "nominal", label: "Nominal", defaultValue: "1000000" },
   //{ key: "currency", label: "Currency", type: "Select", values: currencyCollection, defaultValue: "EUR" },
-  { key: "barrier", label: "Barrier", type: "PercentInput", defaultValue: "1" },
-  { key: "maturity", label: "Maturity", type: "NumberInput", defaultValue: "1" },
-  { key: "strike date", label: "Strike Date", type: "DatePicker" },
-  { key: "scheduling", label: "Scheduling", type: "SchedulingButton" },
-  { key: "Price", label: "Price", type: "Input", defaultValue: "10" },
+  { key: "barrier", label: "Barrier", defaultValue: "1" },
+  { key: "maturity", label: "Maturity", defaultValue: "1" },
+  { key: "strikeDate", label: "Strike Date"},
+  { key: "scheduling", label: "Scheduling"},
+  { key: "price", label: "Price", defaultValue: "10" },
 ];

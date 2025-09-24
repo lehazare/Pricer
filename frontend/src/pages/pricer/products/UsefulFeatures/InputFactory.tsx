@@ -20,10 +20,12 @@ type Props = {
 export default function InputFactory({ col, rowIndex, rows, setRows, schedulingData, setSchedulingData }: Props) {
   const row = rows[rowIndex];
 
-  switch (col.type) {
-    case "Input":
+  switch (col.key) {
+    case "spot":
       return <Input bg="colors.bg" color="colors.white" size="sm" maxW="100px" disabled value={row[col.key]} />;
-    case "Select":
+    case "price":
+      return <Input bg="colors.bg" color="colors.white" size="sm" maxW="100px" disabled value={row[col.key]} />;
+    case "underlying":
       return (
         <Select.Root minW="125px" collection={col.values!} size="sm" onValueChange={async (value) => {
           try {
@@ -59,9 +61,9 @@ export default function InputFactory({ col, rowIndex, rows, setRows, schedulingD
           </Select.Positioner>
         </Select.Root>
       );
-    case "SchedulingButton":
+    case "scheduling":
       return <SchedulingDialog rowIndex={rowIndex} schedulingData={schedulingData} setSchedulingData={setSchedulingData} />;
-    case "PercentInput":
+    case "barrier":
       return (
         <NumberInput.Root
           defaultValue={col.defaultValue}
@@ -74,23 +76,52 @@ export default function InputFactory({ col, rowIndex, rows, setRows, schedulingD
           <NumberInput.Input />
         </NumberInput.Root>
       );
-    case "NumberInput":
+    case "nominal":
       return (
         <NumberInput.Root defaultValue={col.defaultValue} min={0} maxW="130px">
           <NumberInput.Control />
           <NumberInput.Input />
         </NumberInput.Root>
+      );    
+      case "maturity":
+      return (
+        <NumberInput.Root defaultValue={col.defaultValue} value={row.maturity ?? ""} min={0} maxW="130px"
+            onValueChange={async(maturityObject)=>{
+            const maturity = maturityObject.value
+            const request = `http://localhost:5021/strikeDate?maturity=${maturity}&countryCode=FR`
+            const response = await fetch(request);
+            if (!response.ok) throw new Error("Erreur API");
+            const date = await response.json();
+
+            setRows((prev) => {
+              const newRows = [...prev];
+              newRows[rowIndex] = { ...newRows[rowIndex], strikeDate: date, maturity: maturity};
+              return newRows;
+            });
+          }}>
+          <NumberInput.Control />
+          <NumberInput.Input />
+        </NumberInput.Root>
       );
-    case "DatePicker":
+    case "strikeDate":
       return (
         <DatePicker
           wrapperClassName="datePickerWrapper"
           className="datePickerInput"
           selected={row[col.key] ? new Date(row[col.key]) : null}
-          onChange={(date) => {
+          onChange={async(dateObject) => {
+            const date = dateObject?.toISOString()
+            const simplifiedDate = date?.split("T")[0]
+            const request = `http://localhost:5021/maturity?strikeDate=${simplifiedDate}&countryCode=FR`
+            const response = await fetch(request);
+            if (!response.ok) throw new Error("Erreur API");
+            const maturity = await response.json();
+
+            console.log(maturity)
+
             setRows((prev) => {
               const newRows = [...prev];
-              newRows[rowIndex] = { ...newRows[rowIndex], [col.key]: date?.toISOString() ?? "" };
+              newRows[rowIndex] = { ...newRows[rowIndex], [col.key]: date ?? "", maturity: maturity ?? "" };
               return newRows;
             });
           }}
