@@ -4,13 +4,10 @@ import type { ColumnMeta, RowData } from "../types";
 type Props = {
   col: ColumnMeta;
   rowIndex: number;
-  rows: RowData[];
   setRows: React.Dispatch<React.SetStateAction<RowData[]>>;
 };
 
-export default function UnderlyingInput({ col, rowIndex, rows, setRows }: Props) {
-  const row = rows[rowIndex];
-
+export default function UnderlyingInput({ col, rowIndex, setRows }: Props) {
   return (
     <Select.Root
       minW="125px"
