@@ -23,14 +23,14 @@ jobs:
       - name: Build & Push MarketData API
         uses: docker/build-push-action@v5
         with:
-          context: ./MarketDataAPI
+          context: ./backend/MarketData
           push: true
           tags: ghcr.io/lehazare/marketdata_image:latest
 
       - name: Build & Push Scheduling API
         uses: docker/build-push-action@v5
         with:
-          context: ./SchedulingAPI
+          context: ./backend/Scheduler
           push: true
           tags: ghcr.io/lehazare/scheduler_image:latest
 
@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /home/${{ secrets.VPS_USER }}/myapp
+            cd /home/${{ secrets.VPS_USER }}/MyApp
             docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} -p ${{ secrets.GHCR_TOKEN }}
             docker compose pull
             docker compose up -d
