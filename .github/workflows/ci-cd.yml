@@ -2,11 +2,12 @@ name: CI/CD GHCR Deploy
 
 on:
   push:
-    branches: [ "main" ]  # se déclenche à chaque push sur main
+    branches: [ "main" ]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment: OVH VPS
 
     steps:
       - name: Checkout code
