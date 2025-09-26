@@ -1,0 +1,46 @@
+name: CI/CD GHCR Deploy
+
+on:
+  push:
+    branches: [ "main" ]  # se déclenche à chaque push sur main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
+      - name: Build & Push MarketData API
+        uses: docker/build-push-action@v5
+        with:
+          context: ./MarketDataAPI
+          push: true
+          tags: ghcr.io/lehazare/marketdata_image:latest
+
+      - name: Build & Push Scheduling API
+        uses: docker/build-push-action@v5
+        with:
+          context: ./SchedulingAPI
+          push: true
+          tags: ghcr.io/lehazare/scheduler_image:latest
+
+      - name: Deploy on VPS
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /home/${{ secrets.VPS_USER }}/myapp
+            docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} -p ${{ secrets.GHCR_TOKEN }}
+            docker compose pull
+            docker compose up -d
