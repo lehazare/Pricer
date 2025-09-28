@@ -7,9 +7,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowVite", policy =>
+    options.AddPolicy("AllowFrontends", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")
+        policy.WithOrigins(
+                "http://localhost:5173",
+                "https://leolazare.netlify.app/"
+            )
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -21,7 +24,7 @@ var app = builder.Build();
 
 app.MapHealthChecks("/health");
 
-app.UseCors("AllowVite");
+app.UseCors("AllowFrontends");
 
 if (app.Environment.IsDevelopment())
 {

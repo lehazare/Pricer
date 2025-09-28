@@ -1,6 +1,7 @@
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import type { ColumnMeta, RowData } from "../types";
+const apiScheduling = import.meta.env.VITE_API_SCHEDULING;
 
 import "./DatePicker.css"
 import "react-datepicker/dist/react-datepicker.css";
@@ -23,7 +24,7 @@ export default function StrikeDateInput({ col, rowIndex, rows, setRows }: Props)
       onChange={async (dateObject) => {
         const date = dateObject?.toISOString();
         const simplifiedDate = date?.split("T")[0];
-        const request = `http://localhost:5021/maturity?strikeDate=${simplifiedDate}&countryCode=FR`;
+        const request = `${apiScheduling}/maturity?strikeDate=${simplifiedDate}&countryCode=FR`;
         const response = await fetch(request);
         if (!response.ok) throw new Error("Erreur API");
         const maturity = await response.json();

@@ -1,5 +1,6 @@
 import { NumberInput } from "@chakra-ui/react";
 import type { ColumnMeta, RowData } from "../types";
+const apiScheduling = import.meta.env.VITE_API_SCHEDULING;
 
 type Props = {
   col: ColumnMeta;
@@ -19,7 +20,7 @@ export default function MaturityInput({ col, rowIndex, rows, setRows }: Props) {
       maxW="130px"
       onValueChange={async (maturityObject) => {
         const maturity = maturityObject.value;
-        const request = `http://localhost:5021/strikeDate?maturity=${maturity}&countryCode=FR`;
+        const request = `${apiScheduling}/strikeDate?maturity=${maturity}&countryCode=FR`;
         const response = await fetch(request);
         if (!response.ok) throw new Error("Erreur API");
         const date = await response.json();

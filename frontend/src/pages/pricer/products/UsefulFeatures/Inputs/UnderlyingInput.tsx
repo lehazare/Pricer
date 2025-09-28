@@ -1,5 +1,6 @@
 import { Select } from "@chakra-ui/react";
 import type { ColumnMeta, RowData } from "../types";
+const apiMarket = import.meta.env.VITE_API_MARKETDATA;
 
 type Props = {
   col: ColumnMeta;
@@ -16,7 +17,7 @@ export default function UnderlyingInput({ col, rowIndex, setRows }: Props) {
       onValueChange={async (value) => {
         try {
           const equityLabel = value.items.at(0).value;
-          const response = await fetch(`http://localhost:5212/price/${equityLabel}`);
+          const response = await fetch(`${apiMarket}/price/${equityLabel}`);
           if (!response.ok) throw new Error("Erreur API");
           const data = await response.json();
           const price = data.spotPrice;

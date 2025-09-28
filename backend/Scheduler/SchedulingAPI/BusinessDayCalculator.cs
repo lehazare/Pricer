@@ -34,7 +34,7 @@ public static class BusinessDayCalculator
             throw new ArgumentException("Strike date must be after today");
 
         int workingDays = await CountWorkingDaysAsync(startDate, strikeDate, countryCode);
-        return Math.Round((decimal)workingDays / DaysInYear, 4, MidpointRounding.AwayFromZero);
+        return Math.Round((decimal)workingDays / DaysInYear, 2, MidpointRounding.AwayFromZero);
     }
     
     public static async Task<int> CountWorkingDaysAsync(DateTime from, DateTime to, string countryCode)
