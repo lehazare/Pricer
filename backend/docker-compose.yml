@@ -1,5 +1,6 @@
 services:
   marketdata:
+    image: marketdata_image:latest
     build:
       context: ./MarketData
       dockerfile: Dockerfile
