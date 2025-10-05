@@ -1,13 +1,15 @@
 import { Table, Checkbox } from "@chakra-ui/react";
-import { COLUMNS } from "./constants";
+import { COLUMNS } from "../Autocall/attributes";
+import type { ColumnMeta } from "./types";
 
 type Props = {
   rowsLength: number;
   selection: number[];
   setSelection: React.Dispatch<React.SetStateAction<number[]>>;
+  columns : ColumnMeta[];
 };
 
-export default function TableHeader({ rowsLength, selection, setSelection }: Props) {
+export default function TableHeader({ rowsLength, selection, setSelection, columns }: Props) {
   const indeterminate = selection.length > 0 && selection.length < rowsLength;
 
   return (
@@ -27,7 +29,7 @@ export default function TableHeader({ rowsLength, selection, setSelection }: Pro
             <Checkbox.Control />
           </Checkbox.Root>
         </Table.ColumnHeader>
-        {COLUMNS.map((col) => (
+        {columns.map((col) => (
           <Table.ColumnHeader fontWeight="bold" borderColor="colors.cyan" borderWidth="2px" key={col.key} color="colors.cyan">
             {col.label}
           </Table.ColumnHeader>

@@ -6,6 +6,7 @@ import StrikeDateInput from "./Inputs/StrikeDateInput";
 import { NumberInput } from "@chakra-ui/react";
 
 import type { ColumnMeta, RowData, SchedulingRow } from "./types";
+import TypeInput from "./Inputs/TypeInput";
 
 type Props = { col: ColumnMeta; rowIndex: number; rows: RowData[]; setRows: React.Dispatch<React.SetStateAction<RowData[]>>; schedulingData: { [rowIndex: number]: SchedulingRow }; setSchedulingData: React.Dispatch<React.SetStateAction<{ [rowIndex: number]: SchedulingRow }>>; };
 
@@ -16,6 +17,8 @@ export default function InputFactory({ col, rowIndex, rows, setRows, schedulingD
       return <SpotInput col={col} rowIndex={rowIndex} rows={rows} />;
     case "underlying":
       return <UnderlyingInput col={col} rowIndex={rowIndex} setRows={setRows} />;
+    case "type":
+      return <TypeInput col={col} />;
     case "scheduling":
       return <SchedulingDialog rowIndex={rowIndex} schedulingData={schedulingData} setSchedulingData={setSchedulingData} />;
     case "barrier":

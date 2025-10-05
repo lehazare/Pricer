@@ -1,5 +1,5 @@
 import { createListCollection } from "@chakra-ui/react";
-import type { ColumnMeta } from "./types";
+import type { ColumnMeta } from "../CommonFeatures/types";
 
 const tickers = [
   { value: "QQQ", label: "NASDAQ100" },

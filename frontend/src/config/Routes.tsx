@@ -2,11 +2,10 @@
 
 import Home from "../pages/home/Home"
 import Aboutme from "../pages/about/Aboutme"
-import Pricer from "../pages/pricer/Pricer"
 import AlgoTrading from "../pages/algo-trading/AlgoTrading"
 import Autocall from "../pages/pricer/products/Autocall/Autocall"
-import Vanille from "../pages/pricer/products/Vanilla"
-import Asian from "../pages/pricer/products/Asian"
+import Vanille from "../pages/pricer/products/Vanilla/Vanilla"
+import Asian from "../pages/pricer/products/Asian/Asian"
 import Snake from "../pages/games/Snake"
 import Crosswords from "../pages/games/CrossWords"
 
@@ -15,7 +14,6 @@ export const navItems = [
   { 
     label: "Pricer", 
     to: "/pricer",
-    component: <Pricer />,
     children: [
       { label: "Vanilla", to: "/pricer/vanilla", component: <Vanille /> },
       { label: "Asian", to: "/pricer/asian", component: <Asian /> },

@@ -1,10 +1,14 @@
 import { VStack, Table, Button, HStack, ActionBar, Portal } from "@chakra-ui/react";
 import { useState } from "react";
-import type { RowData, SchedulingRow } from "./types";
+import type { ColumnMeta, RowData, SchedulingRow } from "./types";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 
-export default function PricingTable() {
+type Props = {
+  columns: ColumnMeta[];
+}
+
+export default function PricingTable({ columns } : Props) {
   const [rows, setRows] = useState<RowData[]>([{} as RowData]);
   const [schedulingData, setSchedulingData] = useState<{ [rowIndex: number]: SchedulingRow }>({});
   const [selection, setSelection] = useState<number[]>([0]);
@@ -19,7 +23,7 @@ export default function PricingTable() {
   return (
     <VStack>
       <Table.Root variant="outline" size="sm" bg="colors.bg" borderColor="colors.cyan" borderWidth="2px">
-        <TableHeader rowsLength={rows.length} selection={selection} setSelection={setSelection} />
+        <TableHeader rowsLength={rows.length} selection={selection} setSelection={setSelection} columns={columns}/>
         <Table.Body>
           {rows.map((_, rowIndex) => (
             <TableRow
@@ -31,6 +35,7 @@ export default function PricingTable() {
               setSelection={setSelection}
               schedulingData={schedulingData}
               setSchedulingData={setSchedulingData}
+              columns={columns}
             />
           ))}
         </Table.Body>

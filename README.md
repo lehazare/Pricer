@@ -25,17 +25,16 @@ Each product will be documented with **graphical explanations of the payoffs** a
 ### 🖥️ Frontend
 - **React.js** for SPA architecture
 - **Chakra UI** for consistent and modern design components
-- **Dark Visual Studio-inspired theme** (Black, Pink, White)
 
 ### ⚙️ Backend
 - **C# Microservices** hosted in **Docker containers**
-- Deployed via **Kubernetes**
+- Deployed on a Virtual Private Server (VPS) hosted on OVH
 - Pricing logic may later be rewritten in **C++** for performance
 
 ### 🔁 Microservices
 - Pricing Services per payoff type
-- Market Data Service (TODO)
-- Scheduling Service (TODO)
+- Market Data Service
+- Scheduling Service
 
 ---
 
@@ -55,9 +54,8 @@ Each pricing model will be accompanied by:
 |------------------|-------------------------------------------|
 | CI/CD            | GitHub Actions                            |
 | Hosting          | Netlify (Frontend)                        |
-| DNS              | Cloudflare                                 |
-| Backend Infra    | Docker + Kubernetes                        |
-| Optional         | Renting servers if necessary               |
+| DNS + VPS             | OVH                                 |
+| Backend Infra    | Docker                        |
 
 ---
 
@@ -83,20 +81,24 @@ Each pricing model will be accompanied by:
 ## ✅ TODO List
 
 ### 🧩 Services to Develop
-- [ ] **Scheduling** service
-- [ ] **MarketData** service
+- [x] **Scheduling** service
+- [x] **MarketData** service
 
 ### 🚀 CI/CD & Deployment
-- [ ] Automatic build pipeline
-- [ ] Push codebase to GitHub
+- [x] Automatic build pipeline
+- [x] Push codebase to GitHub
 - [ ] Write GitHub-flavored Markdown documentation
+- [ ] Trigger deployment according to what directory was pushed in
 
 ### ☁️ Infrastructure
-- [ ] Netlify for static site hosting
-- [ ] Docker & Kubernetes for backend services
-- [ ] GitHub Actions for CI/CD
-- [ ] Cloudflare DNS setup
-- [ ] (Optional) Rent cloud servers if needed
+- [x] Netlify for static site hosting
+- [x] Docker for backend services
+- [x] GitHub Actions for CI/CD
+- [x] OVH for Cloud (VPS & DNS)
+
+### Features
+- [x] Nginx for Reverse Proxy
+- [x] Certbot (Let's Encrypt) for https
 
 ### 💸 Payoffs to Implement
 - [ ] Digital Option
@@ -120,6 +122,10 @@ Each pricing model will be accompanied by:
 
 ### ⚙️ Backend Optimization
 - [ ] Port critical pricing logic from C# to **C++** for performance and compare it.
+
+### Testing
+- [ ] Unit Testing thanks to NUnit
+- [ ] Comparing Results to MarketPriced Options (especially the greeks)
 
 ---
 

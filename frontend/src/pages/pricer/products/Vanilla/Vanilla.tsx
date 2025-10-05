@@ -4,16 +4,16 @@ import {
   Heading,
 } from "@chakra-ui/react";
 
-import AutocallDrawer from "./AutocallDrawer";
+import VanillaDrawer from "./VanillaDrawer";
 import PricingTable from "../CommonFeatures/PricingTable";
-import { COLUMNS } from "./attributes";
+import {COLUMNS} from "./attributes";
 
-export default function AutocallPage() {
+export default function VanillaPage() {
   return (
     <Box bg="colors.bg" color="colors.white" minH="100vh" p={8}>
-      <Heading>Autocall</Heading>
+      <Heading>Vanilla Option</Heading>
       <Flex justifyContent="flex-end">
-        <AutocallDrawer />
+        <VanillaDrawer />
       </Flex>
       <PricingTable columns={COLUMNS} />
     </Box>

@@ -1,7 +1,7 @@
 import { Table, Checkbox } from "@chakra-ui/react";
-import { COLUMNS } from "./constants";
 import type { RowData, SchedulingRow } from "./types";
 import InputFactory from "./InputFactory";
+import type { ColumnMeta } from "../CommonFeatures/types";
 
 type Props = {
   rowIndex: number;
@@ -13,9 +13,10 @@ type Props = {
   setSchedulingData: React.Dispatch<
     React.SetStateAction<{ [rowIndex: number]: SchedulingRow }>
   >;
+  columns: ColumnMeta[];
 };
 
-export default function TableRow({ rowIndex, rows, setRows, selection, setSelection, schedulingData, setSchedulingData }: Props) {
+export default function TableRow({ rowIndex, rows, setRows, selection, setSelection, schedulingData, setSchedulingData, columns }: Props) {
   return (
     <Table.Row key={rowIndex}>
       <Table.Cell borderColor="colors.cyan" borderWidth="2px" key="checkbox">
@@ -34,7 +35,7 @@ export default function TableRow({ rowIndex, rows, setRows, selection, setSelect
           <Checkbox.Control />
         </Checkbox.Root>
       </Table.Cell>
-      {COLUMNS.map((col) => (
+      {columns.map((col) => (
         <Table.Cell borderColor="colors.cyan" borderWidth="2px" key={col.key}>
           <InputFactory
             col={col}
