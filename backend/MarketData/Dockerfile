@@ -1,20 +1,6 @@
-ARG DOTNET_SDK=8.0
-ARG DOTNET_RUNTIME=8.0
-
-FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_SDK} AS build
-WORKDIR /src
-
-COPY ["MarketDataAPI/MarketDataAPI.csproj", "MarketDataAPI/"]
-RUN dotnet restore "MarketDataAPI/MarketDataAPI.csproj"
-
-COPY . .
-WORKDIR "/src/MarketDataAPI"
-
-RUN dotnet publish -c Release -o /app/publish
-
-FROM mcr.microsoft.com/dotnet/aspnet:${DOTNET_RUNTIME} AS runtime
-WORKDIR /app
-COPY --from=build /app/publish .
-ENV ASPNETCORE_URLS=http://+:80
-EXPOSE 80
-ENTRYPOINT ["dotnet", "MarketDataAPI.dll"]
+FROM python:3.13.7-slim-bookworm
+WORKDIR /code
+COPY ./requirements.txt /code/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+COPY ./app /code/app
+CMD ["fastapi", "run", "app/main.py", "--port", "80"]

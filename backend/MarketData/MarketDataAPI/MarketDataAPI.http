@@ -1,6 +1,0 @@
-@MarketDataAPI_HostAddress = http://localhost:5212
-
-GET {{MarketDataAPI_HostAddress}}/price/
-Accept: application/json
-
-###

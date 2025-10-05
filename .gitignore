@@ -1,5 +1,3 @@
-# Root .gitignore (Fullstack: React + C#)
-
 # Node (Frontend React)
 node_modules/
 dist/
@@ -9,7 +7,7 @@ dist/
 .env*
 !.env.example
 
-# C# (Backend)
+####### C# (Backend)
 bin/
 obj/
 *.user
@@ -54,3 +52,36 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+###### Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.so
+*.egg-info/
+*.egg
+*.log
+*.sqlite3
+
+# Environnements virtuels
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Outils / IDE
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Distribution / build
+build/
+dist/
+*.spec
+

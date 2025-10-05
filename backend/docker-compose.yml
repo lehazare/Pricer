@@ -1,12 +1,13 @@
-version: '3.8'
 services:
   marketdata:
-    image: marketdata_image:latest
+    build:
+      context: ./MarketData
+      dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "5001:80"
+      - "5001:80" 
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ENV=production
 
   scheduler:
     image: scheduler_image:latest
