@@ -1,5 +1,4 @@
 import { Table, Checkbox } from "@chakra-ui/react";
-import { COLUMNS } from "../Autocall/attributes";
 import type { ColumnMeta } from "./types";
 
 type Props = {
