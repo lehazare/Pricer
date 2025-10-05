@@ -1,4 +1,4 @@
-import SpotInput from "./Inputs/SpotInput";
+import ReturnInput from "./Inputs/ReturnInput";
 import UnderlyingInput from "./Inputs/UnderlyingInput";
 import SchedulingDialog from "./Inputs/SchedulingDialog";
 import MaturityInput from "./Inputs/MaturityInput";
@@ -14,7 +14,7 @@ export default function InputFactory({ col, rowIndex, rows, setRows, schedulingD
   switch (col.key) {
     case "spot":
     case "price":
-      return <SpotInput col={col} rowIndex={rowIndex} rows={rows} />;
+      return <ReturnInput col={col} rowIndex={rowIndex} rows={rows} />;
     case "underlying":
       return <UnderlyingInput col={col} rowIndex={rowIndex} setRows={setRows} />;
     case "type":

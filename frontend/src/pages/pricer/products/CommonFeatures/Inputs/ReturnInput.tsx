@@ -1,4 +1,3 @@
-// Inputs/InputFactorySpotOrPrice.tsx
 import { Input } from "@chakra-ui/react";
 import type { ColumnMeta, RowData } from "../types";
 
@@ -8,9 +7,8 @@ type Props = {
   rows: RowData[];
 };
 
-export default function InputFactorySpotOrPrice({ col, rowIndex, rows }: Props) {
+export default function ReturnInput({ col, rowIndex, rows }: Props) {
   const row = rows[rowIndex];
-
   return (
     <Input
       bg="colors.bg"
