@@ -15,7 +15,7 @@ export default function UnderlyingInput({ col, rowIndex, setRows }: Props) {
       const response = await fetch(`${apiMarket}/price/${equityLabel}`);
       if (!response.ok) throw new Error("Erreur API");
       const data = await response.json();
-      const price = data.spotPrice;
+      const price = data.SpotPrice;
 
       setRows((prev) => {
         const newRows = [...prev];
