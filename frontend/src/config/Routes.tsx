@@ -2,7 +2,7 @@
 
 import Home from "../pages/home/Home"
 import Aboutme from "../pages/about/Aboutme"
-import AlgoTrading from "../pages/algo-trading/AlgoTrading"
+import APIs from "../pages/algo-trading/APIs"
 import Autocall from "../pages/pricer/products/Autocall/Autocall"
 import Vanille from "../pages/pricer/products/Vanilla/Vanilla"
 import Asian from "../pages/pricer/products/Asian/Asian"
@@ -21,7 +21,7 @@ export const navItems = [
 
     ]
   },
-  { label: "Algo Trading", to: "/algo", component: <AlgoTrading /> },
+  { label: "API's", to: "/APIs", component: <APIs /> },
   { 
     label: "Games", 
     to: "/games",

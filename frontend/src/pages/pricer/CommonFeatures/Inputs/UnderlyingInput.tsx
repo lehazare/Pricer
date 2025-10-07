@@ -10,16 +10,26 @@ type Props = {
 };
 
 export default function UnderlyingInput({ col, rowIndex, setRows }: Props) {
-  const fetchSpot = async (equityLabel: string) => {
+  const setMarketDatas = async (equityLabel: string) => {
     try {
       const response = await fetch(`${apiMarket}/price/${equityLabel}`);
       if (!response.ok) throw new Error("Erreur API");
       const data = await response.json();
-      const price = data.spotPrice;
+      const spot = data.spotPrice;
+      
+      const volatilityResponse = await fetch(`${apiMarket}/volatility/${equityLabel}`);
+      if (!volatilityResponse.ok) throw new Error("Erreur API");
+      const volData = await volatilityResponse.json();
+      const volatility = volData.vol;
+
+      const rateResponse = await fetch(`${apiMarket}/riskfreerate/^TNX`);
+      if (!rateResponse.ok) throw new Error("Erreur API");
+      const rateData = await rateResponse.json();
+      const rate = rateData.riskFreeRate;
 
       setRows((prev) => {
         const newRows = [...prev];
-        newRows[rowIndex] = { ...newRows[rowIndex], spot: price };
+        newRows[rowIndex] = { ...newRows[rowIndex], spot: spot, strike : spot, vol: volatility, rfrate: rate };
         return newRows;
       });
     } catch (error) {
@@ -29,7 +39,7 @@ export default function UnderlyingInput({ col, rowIndex, setRows }: Props) {
 
   useEffect(() => {
     if (col.defaultValue) {
-      fetchSpot(col.defaultValue);
+      setMarketDatas(col.defaultValue);
     }
   }, [col.defaultValue]); 
 
@@ -41,7 +51,7 @@ export default function UnderlyingInput({ col, rowIndex, setRows }: Props) {
       defaultValue={col.defaultValue ? [col.defaultValue] : undefined}
       onValueChange={async (value) => {
         const equityLabel = value.items.at(0).value;
-        fetchSpot(equityLabel); 
+        setMarketDatas(equityLabel); 
       }}
     >
       <Select.HiddenSelect />

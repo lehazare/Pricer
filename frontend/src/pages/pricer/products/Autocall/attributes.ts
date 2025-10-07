@@ -1,5 +1,5 @@
 import { createListCollection } from "@chakra-ui/react";
-import type { ColumnMeta } from "../CommonFeatures/types";
+import type { ColumnMeta } from "../../CommonFeatures/types";
 
 const tickers = [
   { value: "QQQ", label: "NASDAQ100" },
@@ -25,6 +25,8 @@ export const COLUMNS: ColumnMeta[] = [
   { key: "underlying", label: "Underlying", values: underlyingCollection, defaultValue: "SPY" },
   { key: "spot", label: "Spot"},
   { key: "nominal", label: "Nominal", defaultValue: "1000000" },
+  { key: "vol", label: "Volatility"},
+  { key: "rfrate", label: "RFRate"},
   //{ key: "currency", label: "Currency", type: "Select", values: currencyCollection, defaultValue: "EUR" },
   { key: "barrier", label: "Barrier", defaultValue: "1" },
   { key: "maturity", label: "Maturity", defaultValue: "1" },

@@ -34,6 +34,13 @@ jobs:
           push: true
           tags: ghcr.io/lehazare/scheduler_image:latest
 
+      - name: Build & Push Pricing API
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/Pricer
+          push: true
+          tags: ghcr.io/lehazare/pricer_image:latest
+
       - name: Deploy on VPS
         uses: appleboy/ssh-action@v1.2.0
         with:

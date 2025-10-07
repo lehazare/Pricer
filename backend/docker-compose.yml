@@ -12,8 +12,22 @@ services:
 
   scheduler:
     image: scheduler_image:latest
+    build:
+      context: ./Scheduler  
+      dockerfile: Dockerfile
     restart: unless-stopped
     ports:
       - "5002:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+  
+  pricer:
+    image: pricer_image:latest
+    build:
+      context: ./Pricer
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "5003:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production

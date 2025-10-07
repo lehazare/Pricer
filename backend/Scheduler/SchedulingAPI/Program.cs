@@ -29,11 +29,8 @@ app.MapHealthChecks("/health");
 
 app.UseCors("AllowFrontends");
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

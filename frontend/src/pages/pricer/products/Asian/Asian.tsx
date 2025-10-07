@@ -5,7 +5,7 @@ import {
 } from "@chakra-ui/react";
 
 import AsianDrawer from "./AsianDrawer";
-import PricingTable from "../CommonFeatures/PricingTable";
+import PricingTable from "../../CommonFeatures/PricingTable";
 import { COLUMNS } from "./attributes";
 
 export default function AutocallPage() {
