@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.routers import price
+from src.routers import price, volatility, riskfreerate
 
 app = FastAPI(title="Market Data API", version="1.0")
 
@@ -22,3 +22,7 @@ def health_check():
     return {"status": "healthy"}
 
 app.include_router(price.router)
+
+app.include_router(volatility.router)
+
+app.include_router(riskfreerate.router)

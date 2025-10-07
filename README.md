@@ -127,6 +127,16 @@ Each pricing model will be accompanied by:
 - [ ] Unit Testing thanks to NUnit
 - [ ] Comparing Results to MarketPriced Options (especially the greeks)
 
+### Notions to introduce
+- [ ] Implied Volatility
+- [ ] Historical Volatility
+- [ ] Local Volatility
+- [ ] Stochastic Volatility
+
+- [ ] Réduction de Variance
+- [ ] Variable Antithétique
+
+
 ---
 
 ## 👤 About Me

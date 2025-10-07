@@ -7,4 +7,4 @@ finance_service = YahooFinanceService()
 @router.get("/price/{symbol}")
 def get_price(symbol: str):
     price = finance_service.get_price(symbol)
-    return {"Symbol": symbol, "SpotPrice": price}
+    return {"Symbol": symbol, "spotPrice": price}
