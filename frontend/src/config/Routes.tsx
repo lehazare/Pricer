@@ -1,13 +1,11 @@
-// src/config/navItems.ts
-
 import Home from "../pages/home/Home"
 import Aboutme from "../pages/about/Aboutme"
-import APIs from "../pages/algo-trading/APIs"
 import Autocall from "../pages/pricer/products/Autocall/Autocall"
 import Vanille from "../pages/pricer/products/Vanilla/Vanilla"
 import Asian from "../pages/pricer/products/Asian/Asian"
-import Snake from "../pages/games/Snake"
-import Crosswords from "../pages/games/CrossWords"
+import PricingApi from "../pages/apis/PricingApi"
+import MarketDataApi from "../pages/apis/MarketDataApi"
+import SchedulingApi from "../pages/apis/SchedulingApi"
 
 export const navItems = [
   { label: "Home", to: "/", component: <Home /> },
@@ -21,14 +19,11 @@ export const navItems = [
 
     ]
   },
-  { label: "API's", to: "/APIs", component: <APIs /> },
-  { 
-    label: "Games", 
-    to: "/games",
-    children: [
-      { label: "Snake", to: "/games/snake", component: <Snake /> },
-      { label: "Crosswords Generator", to: "/games/crosswords", component: <Crosswords /> }
-    ]
-  },
+  { label: "API's", to: "/apis",     
+      children: [
+      { label: "Pricing", to: "/apis/pricing", component: <PricingApi /> },
+      { label: "Market Data", to: "/apis/marketdata", component: <MarketDataApi /> },
+      { label: "Scheduling", to: "/apis/scheduling", component: <SchedulingApi /> },
+    ] },
   { label: "About Me", to: "/about", component: <Aboutme /> },
 ]
