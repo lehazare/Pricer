@@ -45,7 +45,8 @@ const Navbar = () => {
                         key={subLabel}
                         asChild
                         value={subTo}
-                        _hover={{ color: "colors.purple" }}
+                        color={"colors.white"}
+                        _hover={{ color: "colors.purple", bgColor:'colors.dark_gray'}}
                       >
                           <Link to={subTo}>{subLabel}</Link> 
                       </Menu.Item>

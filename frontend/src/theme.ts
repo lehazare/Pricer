@@ -6,6 +6,7 @@ const colors = {
     cyan: {value : '#0bceceff'},
     white: {value : '#f8f8f2'},
     gray : {value : '#646464ff'},
+    dark_gray : {value : '#383737ff'},
     bg: {value : '#181818ff'},
     black : {value : '#000000ff'}
   },
