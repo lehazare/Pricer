@@ -29,13 +29,13 @@ class YahooFinanceService:
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error fetching data for {symbol}: {e}")
         
-    def get_risk_free_rate(self, symbol: str = "^TNX") -> float:
+    def get_risk_free_rate(self, symbol: str) -> float:
         try:
             ticker = yf.Ticker(symbol)
             data = ticker.history(period="1d")
             if data.empty:
                 raise ValueError("No data found for this symbol.")
             yield_last = data["Close"].iloc[-1]
-            return round(float(yield_last) / 100, 4)
+            return round(float(yield_last) / 100, 2)
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error fetching risk-free rate for {symbol}: {e}")
