@@ -13,7 +13,6 @@ builder.Services.AddCors(options =>
                 "http://localhost:5173",
                 "https://leolazare.netlify.app",
                 "https://leolazare.fr"
-                "test"
             )
             .AllowAnyHeader()
             .AllowAnyMethod();
