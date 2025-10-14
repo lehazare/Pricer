@@ -64,24 +64,27 @@ export default function PricingTable({ columns }: Props) {
 
   return (
     <VStack>
-      <Table.Root variant="outline" size="sm" bg="colors.bg" borderColor="colors.cyan" borderWidth="2px">
-        <TableHeader rowsLength={rows.length} selection={selection} setSelection={setSelection} columns={columns} />
-        <Table.Body>
-          {rows.map((_, rowIndex) => (
-            <TableRow
-              key={rowIndex}
-              rowIndex={rowIndex}
-              rows={rows}
-              setRows={setRows}
-              selection={selection}
-              setSelection={setSelection}
-              schedulingData={schedulingData}
-              setSchedulingData={setSchedulingData}
-              columns={columns}
-            />
-          ))}
-        </Table.Body>
-      </Table.Root>
+      <Table.ScrollArea borderWidth="0" maxW="100%">
+        <Table.Root variant="outline" size="sm" bg="colors.bg" borderColor="colors.cyan" borderWidth="2px">
+          <TableHeader rowsLength={rows.length} selection={selection} setSelection={setSelection} columns={columns} />
+          <Table.Body>
+            {rows.map((_, rowIndex) => (
+              <TableRow
+                key={rowIndex}
+                rowIndex={rowIndex}
+                rows={rows}
+                setRows={setRows}
+                selection={selection}
+                setSelection={setSelection}
+                schedulingData={schedulingData}
+                setSchedulingData={setSchedulingData}
+                columns={columns}
+              />
+            ))}
+          </Table.Body>
+        </Table.Root>
+      </Table.ScrollArea>
+
 
       <ActionBar.Root open={hasSelection}>
         <Portal>
