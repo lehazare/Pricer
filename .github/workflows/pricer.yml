@@ -6,6 +6,10 @@ on:
       - 'backend/Pricer/**'
       - '.github/workflows/pricer-ci.yml'
 
+permissions:
+  contents: read
+  actions: write
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest

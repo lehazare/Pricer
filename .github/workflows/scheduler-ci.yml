@@ -6,6 +6,10 @@ on:
       - 'backend/Scheduler/**'
       - '.github/workflows/scheduler-ci.yml'
 
+permissions:
+  contents: read
+  actions: write
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
