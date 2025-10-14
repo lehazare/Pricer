@@ -1,5 +1,7 @@
 # 🧠 Pricer — Web App for Option Pricing & Financial Engineering Portfolio
 
+![ESLint](https://github.com/lehazare/Pricer/actions/workflows/lint.yml/badge.svg)
+
 Welcome to **Pricer**, a full-stack web application built to showcase my skills as a **Functional Developer / IT Quant**, specializing in **financial engineering**, **option pricing**, and **algorithmic trading**.
 
 This project is both a **technical portfolio** and a **live pricer** for various financial derivatives, combining clean software design with cutting-edge pricing models and microservice architecture.
