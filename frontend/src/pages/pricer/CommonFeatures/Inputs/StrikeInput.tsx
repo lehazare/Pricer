@@ -17,6 +17,7 @@ export default function StrikeInput({ rowIndex, rows, setRows }: Props) {
       min={0}
       step={0.1}
       maxW="130px"
+      minW="80px"
       onValueChange={async (newValue) => {
         setRows((prev) => {
         const newRows = [...prev];

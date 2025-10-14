@@ -15,6 +15,7 @@ export default function ReturnInput({ col, rowIndex, rows }: Props) {
       color="colors.white"
       size="sm"
       maxW="100px"
+      minW="70px"
       disabled
       value={row[col.key]}
     />
