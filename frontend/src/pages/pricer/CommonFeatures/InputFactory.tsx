@@ -21,7 +21,7 @@ export default function InputFactory({ col, rowIndex, rows, setRows, schedulingD
     case "underlying":
       return <UnderlyingInput col={col} rowIndex={rowIndex} setRows={setRows} />;
     case "type":
-      return <TypeInput col={col} rowIndex={rowIndex} rows={rows} setRows={setRows}/>;
+      return <TypeInput col={col} rowIndex={rowIndex} setRows={setRows}/>;
     case "scheduling":
       return <SchedulingDialog rowIndex={rowIndex} schedulingData={schedulingData} setSchedulingData={setSchedulingData} />;
     case "barrier":

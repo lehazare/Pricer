@@ -50,7 +50,7 @@ export default function UnderlyingInput({ col, rowIndex, setRows }: Props) {
       size="sm"
       defaultValue={col.defaultValue ? [col.defaultValue] : undefined}
       onValueChange={async (value) => {
-        const equityLabel = value.items.at(0).value;
+        const equityLabel = value.items.at(0)!.value;
         setMarketDatas(equityLabel); 
       }}
     >

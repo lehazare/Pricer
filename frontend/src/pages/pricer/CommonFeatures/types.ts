@@ -4,7 +4,7 @@ export type ColumnMeta = {
   key: string;
   label: string;
   defaultValue?: string;
-  values?: ListCollection<any>;
+  values?: ListCollection<{ label: string; value: string }>;
 };
 
 export type RowData = {

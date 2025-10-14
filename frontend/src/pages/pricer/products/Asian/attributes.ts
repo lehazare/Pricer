@@ -21,11 +21,13 @@ export const currencyCollection = createListCollection({
   })),
 });
 
+const optionType = [
+  { value: "0", label: "Call" },
+  { value: "1", label: "Put" },
+];
+
 export const typeCollection = createListCollection({
-  items: ["Call", "Put"].map((label, value) => ({
-    label,
-    value,
-  })),
+  items: optionType,
 });
 
 export const COLUMNS: ColumnMeta[] = [
