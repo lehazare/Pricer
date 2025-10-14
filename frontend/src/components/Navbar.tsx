@@ -1,4 +1,4 @@
-import { HStack, Box, Button, Menu, Portal, useDisclosure, IconButton, CloseButton, Drawer, VStack, Text } from "@chakra-ui/react"
+import { HStack, Box, Button, Menu, Portal, useDisclosure, IconButton, Drawer, VStack, Text } from "@chakra-ui/react"
 import { Link, useLocation } from "react-router-dom"
 import { navItems } from "../config/Routes";
 import { GiHamburgerMenu } from "react-icons/gi";
