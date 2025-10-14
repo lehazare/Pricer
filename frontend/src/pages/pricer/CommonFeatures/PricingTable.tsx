@@ -32,7 +32,7 @@ export default function PricingTable({ columns }: Props) {
           T: parseFloat(row.maturity),
           R: row.rfrate,
           Sigma: row.vol,
-          IsCall: row.type == "Call",
+          IsCall: row.type == "call",
           type: "vanilla",
         };
 
