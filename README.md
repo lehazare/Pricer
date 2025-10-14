@@ -101,11 +101,12 @@ Each pricing model will be accompanied by:
 - [x] Certbot (Let's Encrypt) for https
 
 ### 💸 Payoffs to Implement
-- [ ] Digital Option
-- [ ] Call Spread
 - [ ] Autocall
 - [ ] Asian Option
 - [ ] Vanilla Option
+- [ ] Digital Option
+- [ ] Call Spread
+- [ ] Bonds
 
 ### 🧠 Pricer Logic
 - [ ] One dedicated **document** per pricing type
@@ -128,7 +129,7 @@ Each pricing model will be accompanied by:
 - [ ] Comparing Results to MarketPriced Options (especially the greeks)
 
 ### Notions to introduce
-- [ ] Implied Volatility
+- [ ] Implied Volatility + Smile / Skew
 - [ ] Historical Volatility
 - [ ] Local Volatility
 - [ ] Stochastic Volatility

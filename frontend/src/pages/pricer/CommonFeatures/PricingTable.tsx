@@ -86,7 +86,7 @@ export default function PricingTable({ columns }: Props) {
       <ActionBar.Root open={hasSelection}>
         <Portal>
           <ActionBar.Positioner>
-            <ActionBar.Content>
+            <ActionBar.Content bg={"colors.purple"}>
               <ActionBar.SelectionTrigger>{selection.length} selected</ActionBar.SelectionTrigger>
               <ActionBar.Separator />
               <Button variant="outline" size="sm" onClick={handlePrice}>
