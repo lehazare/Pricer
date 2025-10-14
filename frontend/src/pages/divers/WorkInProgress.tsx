@@ -17,9 +17,9 @@ export default function WorkInProgress() {
     const [croquettes, setCroquettes] = useState<Croquette[]>([]);
 
     const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        const angle = Math.random() * 360; // rotation aléatoire
-        const dx = (Math.random() - 0.5) * 100; // décalage horizontal aléatoire
-        const dy = (Math.random() - 0.5) * 100; // décalage vertical aléatoire
+        const angle = Math.random() * 360;
+        const dx = (Math.random() - 0.5) * 100;
+        const dy = (Math.random() - 0.5) * 100;
 
         const newCroquette: Croquette = {
             id: Date.now(),
@@ -32,7 +32,6 @@ export default function WorkInProgress() {
 
         setCroquettes((prev) => [...prev, newCroquette]);
 
-        // supprime après 2s
         setTimeout(() => {
             setCroquettes((prev) => prev.filter((c) => c.id !== newCroquette.id));
         }, 2000);
@@ -78,11 +77,11 @@ export default function WorkInProgress() {
                         position="absolute"
                         left={c.x}
                         top={c.y}
-                        initial={{ scale: 0, rotate: 0, x: "-170%", y: "-300%" }} // pile au clic
+                        initial={{ scale: 0, rotate: 0, x: "-170%", y: "-300%" }}
                         animate={{
                             scale: [0, 1.2, 1],
                             rotate: c.angle,
-                            x: `calc(-50% + ${c.dx}px)`, // décalage seulement dans l’anim
+                            x: `calc(-50% + ${c.dx}px)`,
                             y: `calc(-50% + ${c.dy}px)`,
                             opacity: [1, 1, 0],
                         }}

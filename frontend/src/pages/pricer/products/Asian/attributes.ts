@@ -22,8 +22,8 @@ export const currencyCollection = createListCollection({
 });
 
 const optionType = [
-  { value: "0", label: "Call" },
-  { value: "1", label: "Put" },
+  { value: "call", label: "Call" },
+  { value: "put", label: "Put" },
 ];
 
 export const typeCollection = createListCollection({
@@ -31,7 +31,7 @@ export const typeCollection = createListCollection({
 });
 
 export const COLUMNS: ColumnMeta[] = [
-  { key: "type", label: "Type", values: typeCollection, defaultValue: "Call" },
+  { key: "type", label: "Type", values: typeCollection, defaultValue: "call" },
   { key: "underlying", label: "Underlying", values: underlyingCollection, defaultValue: "CAC" },
   { key: "spot", label: "Spot"},
   { key: "vol", label: "Volatility"},
