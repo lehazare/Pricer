@@ -1,0 +1,36 @@
+name: Scheduler CI/CD
+
+on:
+  push:
+    paths:
+      - 'backend/Scheduler/**'
+      - '.github/workflows/scheduler-ci.yml'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    environment: OVH VPS
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
+      - name: Build & Push Scheduler API
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/Scheduler
+          push: true
+          tags: ghcr.io/lehazare/scheduler_image:latest
+
+      - name: Trigger Deployment
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: deploy.yml
+          token: ${{ secrets.GITHUB_TOKEN }}
