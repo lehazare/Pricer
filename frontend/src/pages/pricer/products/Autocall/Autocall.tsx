@@ -10,7 +10,7 @@ import { COLUMNS } from "./attributes";
 
 export default function AutocallPage() {
   return (
-    <Box bg="colors.bg" color="colors.white" minH="100vh" p={8}>
+    <Box bg="colors.bg" color="colors.white" minH="100vh" p={{ base: "0", md: "8" }}>
       <Heading>Autocall</Heading>
       <Flex justifyContent="flex-end">
         <AutocallDrawer />
