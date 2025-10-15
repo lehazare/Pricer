@@ -25,7 +25,7 @@ class YahooFinanceService:
             data = data.dropna()
             vol_daily = data["LogReturn"].std()
             vol_annual = vol_daily * np.sqrt(252)
-            return round(float(vol_annual), 2)
+            return round(float(vol_annual), 4)
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error fetching data for {symbol}: {e}")
         
@@ -36,6 +36,17 @@ class YahooFinanceService:
             if data.empty:
                 raise ValueError("No data found for this symbol.")
             yield_last = data["Close"].iloc[-1]
-            return round(float(yield_last) / 100, 2)
+            return round(float(yield_last) / 100, 4)
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error fetching risk-free rate for {symbol}: {e}")
+        
+    def get_currency(self, symbol: str) -> str:
+        try:
+            ticker = yf.Ticker(symbol)
+            info = ticker.info
+            currency = info.get("currency")
+            if not currency:
+                raise ValueError("Currency not available for this symbol.")
+            return currency
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Error fetching currency for {symbol}: {e}")

@@ -1,4 +1,4 @@
-import ReturnInput from "./Returns/ReturnInput";
+import SpotReturn from "./Returns/SpotReturn";
 import UnderlyingInput from "./Inputs/UnderlyingInput";
 import SchedulingDialog from "./Inputs/SchedulingDialog";
 import MaturityInput from "./Inputs/MaturityInput";
@@ -8,6 +8,8 @@ import StrikeInput from "./Inputs/StrikeInput";
 import PriceReturn from "./Returns/PriceReturn";
 import { NumberInput } from "@chakra-ui/react";
 import type { ColumnMeta, RowData, SchedulingRow } from "./types";
+import VolReturn from "./Returns/VolReturn";
+import RateReturn from "./Returns/RateReturn";
 
 
 type Props = { col: ColumnMeta; rowIndex: number; rows: RowData[]; setRows: React.Dispatch<React.SetStateAction<RowData[]>>; schedulingData: { [rowIndex: number]: SchedulingRow }; setSchedulingData: React.Dispatch<React.SetStateAction<{ [rowIndex: number]: SchedulingRow }>>; };
@@ -16,10 +18,12 @@ export default function InputFactory({ col, rowIndex, rows, setRows, schedulingD
   switch (col.key) {
     case "price":
       return <PriceReturn col={col} rowIndex={rowIndex} rows={rows} />;
-    case "spot":
     case "vol":
+      return <VolReturn col={col} rowIndex={rowIndex} rows={rows} />;
     case "rfrate":
-      return <ReturnInput col={col} rowIndex={rowIndex} rows={rows} />;
+      return <RateReturn col={col} rowIndex={rowIndex} rows={rows} />;
+    case "spot":
+      return <SpotReturn col={col} rowIndex={rowIndex} rows={rows} />;
     case "underlying":
       return <UnderlyingInput col={col} rowIndex={rowIndex} setRows={setRows} />;
     case "type":
