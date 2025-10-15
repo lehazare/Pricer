@@ -96,7 +96,7 @@ const Navbar = () => {
         <Portal>
           <Drawer.Backdrop />
           <Drawer.Positioner paddingTop={20}>
-            <Drawer.Content>
+            <Drawer.Content bg={"colors.bg"}>
               <Drawer.Body>
                 <VStack gap={3} p={4}>
                   {navItems.map((item, i) => (
