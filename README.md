@@ -1,6 +1,10 @@
 # 🧠 Pricer — Web App for Option Pricing & Financial Engineering Portfolio
 
 ![ESLint](https://github.com/lehazare/Pricer/actions/workflows/lint.yml/badge.svg)
+![MarketData CI](https://github.com/lehazare/Pricer/actions/workflows/marketdata-ci.yml/badge.svg)
+![Pricer CI](https://github.com/lehazare/Pricer/actions/workflows/pricer.yml/badge.svg)
+![Scheduler CI](https://github.com/lehazare/Pricer/actions/workflows/scheduler-ci.yml/badge.svg)
+![Deploy VPS CI](https://github.com/lehazare/Pricer/actions/workflows/deploy.yml/badge.svg)
 
 Welcome to **Pricer**, a full-stack web application built to showcase my skills as a **Functional Developer / IT Quant**, specializing in **financial engineering**, **option pricing**, and **algorithmic trading**.
 
