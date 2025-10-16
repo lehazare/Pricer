@@ -5,6 +5,7 @@ export type ColumnMeta = {
   label: string;
   defaultValue?: string;
   values?: ListCollection<{ label: string; value: string }>;
+  disabled?: boolean;
 };
 
 export type RowData = {

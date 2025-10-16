@@ -35,6 +35,7 @@ export const COLUMNS: ColumnMeta[] = [
   { key: "type", label: "Type", values: typeCollection, defaultValue: "call" },
   { key: "underlying", label: "Underlying", values: underlyingCollection, defaultValue: "CAC" },
   { key: "spot", label: "Spot"},
+  { key: "currency", label: "Currency", disabled: true},
   { key: "strike", label: "Strike"},
   { key: "vol", label: "Volatility"},
   { key: "rfrate", label: "RFRate"},

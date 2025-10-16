@@ -28,10 +28,10 @@ export default function TableHeader({ rowsLength, selection, setSelection, colum
             <Checkbox.Control />
           </Checkbox.Root>
         </Table.ColumnHeader>
-        {columns.map((col) => (
+        {columns.map((col) => ( !col.disabled ? 
           <Table.ColumnHeader fontWeight="bold" borderColor="colors.cyan" borderWidth="2px" key={col.key} color="colors.cyan">
             {col.label}
-          </Table.ColumnHeader>
+          </Table.ColumnHeader> : <></>
         ))}
       </Table.Row>
     </Table.Header>

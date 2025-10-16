@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Select } from "@chakra-ui/react";
 import type { ColumnMeta, RowData } from "../types";
-const apiMarket = import.meta.env.VITE_API_MARKETDATA;
+const apiMarketData = import.meta.env.VITE_API_MARKETDATA;
 
 type Props = {
   col: ColumnMeta;
@@ -12,24 +12,33 @@ type Props = {
 export default function UnderlyingInput({ col, rowIndex, setRows }: Props) {
   const setMarketDatas = async (equityLabel: string) => {
     try {
-      const response = await fetch(`${apiMarket}/price/${equityLabel}`);
+      const response = await fetch(`${apiMarketData}/price/${equityLabel}`);
       if (!response.ok) throw new Error("Erreur API");
       const data = await response.json();
       const spot = data.spotPrice;
-      
-      const volatilityResponse = await fetch(`${apiMarket}/volatility/${equityLabel}`);
+
+      const volatilityResponse = await fetch(`${apiMarketData}/volatility/${equityLabel}`);
       if (!volatilityResponse.ok) throw new Error("Erreur API");
       const volData = await volatilityResponse.json();
       const volatility = volData.vol;
 
-      const rateResponse = await fetch(`${apiMarket}/riskfreerate/^TNX`);
+      const rateResponse = await fetch(`${apiMarketData}/riskfreerate/^TNX`);
       if (!rateResponse.ok) throw new Error("Erreur API");
       const rateData = await rateResponse.json();
       const rate = rateData.riskFreeRate;
 
+      const currencyResponse = await fetch(`${apiMarketData}/currency/${equityLabel}`);
+      if (!currencyResponse.ok) throw new Error("Erreur API");
+      const currencyData = await currencyResponse.json();
+      const currency = currencyData.currency;
+
+      console.log(currencyData)
+
+      console.log(currency)
+
       setRows((prev) => {
         const newRows = [...prev];
-        newRows[rowIndex] = { ...newRows[rowIndex], spot: spot, strike : spot, vol: volatility, rfrate: rate };
+        newRows[rowIndex] = { ...newRows[rowIndex], spot: spot, strike: spot, vol: volatility, rfrate: rate, currency: currency };
         return newRows;
       });
     } catch (error) {
@@ -41,7 +50,7 @@ export default function UnderlyingInput({ col, rowIndex, setRows }: Props) {
     if (col.defaultValue) {
       setMarketDatas(col.defaultValue);
     }
-  }, [col.defaultValue]); 
+  }, [col.defaultValue]);
 
   return (
     <Select.Root
@@ -51,7 +60,7 @@ export default function UnderlyingInput({ col, rowIndex, setRows }: Props) {
       defaultValue={col.defaultValue ? [col.defaultValue] : undefined}
       onValueChange={async (value) => {
         const equityLabel = value.items.at(0)!.value;
-        setMarketDatas(equityLabel); 
+        setMarketDatas(equityLabel);
       }}
     >
       <Select.HiddenSelect />

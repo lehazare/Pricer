@@ -22,6 +22,7 @@ export default function VolReturn({ col, rowIndex, rows }: Props) {
       value={String(vol)}
       formatOptions={{
           style: "percent",
+          minimumFractionDigits : 2,
         }}>
       <NumberInput.Input />
     </NumberInput.Root>

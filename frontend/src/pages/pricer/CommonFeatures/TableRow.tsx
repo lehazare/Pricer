@@ -35,7 +35,7 @@ export default function TableRow({ rowIndex, rows, setRows, selection, setSelect
           <Checkbox.Control />
         </Checkbox.Root>
       </Table.Cell>
-      {columns.map((col) => (
+      {columns.map((col) => ( !col.disabled ?
         <Table.Cell borderColor="colors.cyan" borderWidth="2px" key={col.key}>
           <InputFactory
             col={col}
@@ -45,7 +45,7 @@ export default function TableRow({ rowIndex, rows, setRows, selection, setSelect
             schedulingData={schedulingData}
             setSchedulingData={setSchedulingData}
           />
-        </Table.Cell>
+        </Table.Cell> : <></>
       ))}
     </Table.Row>
   );
