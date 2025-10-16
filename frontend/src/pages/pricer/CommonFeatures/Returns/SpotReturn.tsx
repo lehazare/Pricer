@@ -1,7 +1,5 @@
 import { NumberInput } from "@chakra-ui/react";
 import type { ColumnMeta, RowData } from "../types";
-import { useState } from "react";
-const apiMarketData = import.meta.env.VITE_API_MARKETDATA;
 
 
 type Props = {
@@ -13,7 +11,9 @@ type Props = {
 export default function SpotReturn({ col, rowIndex, rows }: Props) {
   const row = rows[rowIndex];
 
-  console.log(row.currency)
+  if (!row.currency) {
+    return <NumberInput.Root size="sm" maxW="100px" minW="70px" disabled><NumberInput.Input /></NumberInput.Root>
+  }
 
   return (
     <NumberInput.Root
@@ -26,7 +26,7 @@ export default function SpotReturn({ col, rowIndex, rows }: Props) {
       value={String(row[col.key])}
       formatOptions={{
         style: "currency",
-        currency: "EUR",
+        currency: row.currency,
         currencyDisplay: "symbol",
         currencySign: "standard",
       }}>

@@ -33,7 +33,7 @@ export const typeCollection = createListCollection({
 export const COLUMNS: ColumnMeta[] = [
   { key: "type", label: "Type", values: typeCollection, defaultValue: "call" },
   { key: "underlying", label: "Underlying", values: underlyingCollection, defaultValue: "CAC" },
-  { key: "currency", label: "Currency", disabled: true},
+  { key: "currency", label: "Currency", disabled: true },
   { key: "spot", label: "Spot"},
   { key: "vol", label: "Volatility"},
   { key: "rfrate", label: "RFRate"},

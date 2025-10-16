@@ -1,6 +1,18 @@
+import string
 from fastapi import HTTPException
 import numpy as np
 import yfinance as yf
+
+def get_bond_from_cur(symbol: str) -> string:
+        match symbol:
+            case "USD":
+                return "^TNX"
+            case "EUR":
+                return "FR10Y.GBOND"
+            case "GBP":
+                return "UK10Y.GBOND"
+            case _:
+                return "^TNX"
 
 class YahooFinanceService:
     
@@ -31,14 +43,15 @@ class YahooFinanceService:
         
     def get_risk_free_rate(self, symbol: str) -> float:
         try:
-            ticker = yf.Ticker(symbol)
+            bond = get_bond_from_cur(symbol)
+            ticker = yf.Ticker(bond)
             data = ticker.history(period="1d")
             if data.empty:
-                raise ValueError("No data found for this symbol.")
+                raise ValueError("No data found for this bond.")
             yield_last = data["Close"].iloc[-1]
             return round(float(yield_last) / 100, 4)
         except Exception as e:
-            raise HTTPException(status_code=500, detail=f"Error fetching risk-free rate for {symbol}: {e}")
+            raise HTTPException(status_code=500, detail=f"Error fetching risk-free rate for {bond}: {e}")
         
     def get_currency(self, symbol: str) -> str:
         try:

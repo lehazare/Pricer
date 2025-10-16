@@ -28,7 +28,7 @@ export default function PricingTable({ columns }: Props) {
 
         const payload = {
           S0: row.spot,
-          K: row.strike,
+          K: Number(row.strike),
           T: parseFloat(row.maturity),
           R: row.rfrate,
           Sigma: row.vol,

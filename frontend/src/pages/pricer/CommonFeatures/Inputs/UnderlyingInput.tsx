@@ -22,19 +22,15 @@ export default function UnderlyingInput({ col, rowIndex, setRows }: Props) {
       const volData = await volatilityResponse.json();
       const volatility = volData.vol;
 
-      const rateResponse = await fetch(`${apiMarketData}/riskfreerate/^TNX`);
-      if (!rateResponse.ok) throw new Error("Erreur API");
-      const rateData = await rateResponse.json();
-      const rate = rateData.riskFreeRate;
-
       const currencyResponse = await fetch(`${apiMarketData}/currency/${equityLabel}`);
       if (!currencyResponse.ok) throw new Error("Erreur API");
       const currencyData = await currencyResponse.json();
       const currency = currencyData.currency;
 
-      console.log(currencyData)
-
-      console.log(currency)
+      const rateResponse = await fetch(`${apiMarketData}/riskfreerate/${currency}`);
+      if (!rateResponse.ok) throw new Error("Erreur API");
+      const rateData = await rateResponse.json();
+      const rate = rateData.riskFreeRate;
 
       setRows((prev) => {
         const newRows = [...prev];

@@ -28,7 +28,6 @@ export const COLUMNS: ColumnMeta[] = [
   { key: "vol", label: "Volatility"},
   { key: "rfrate", label: "RFRate"},
   { key: "currency", label: "Currency", disabled: true},
-  //{ key: "currency", label: "Currency", type: "Select", values: currencyCollection, defaultValue: "EUR" },
   { key: "barrier", label: "Barrier", defaultValue: "1" },
   { key: "maturity", label: "Maturity", defaultValue: "1" },
   { key: "strikeDate", label: "Strike Date"},

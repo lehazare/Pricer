@@ -22,27 +22,37 @@ export default function StrikeInput({ rowIndex, rows, setRows }: Props) {
     return pct.toFixed(2);
   }, [row.strike, row.spot]);
 
+  if (!row.currency) {
+    return <NumberInput.Root size="sm" maxW="100px" minW="70px" disabled><NumberInput.Input /></NumberInput.Root>
+  }
+
   return (
-    <HoverCard.Root size="sm" open={open} onOpenChange={(e) => setOpen(e.open)} positioning={{ }}>
+    <HoverCard.Root size="sm" open={open} onOpenChange={(e) => setOpen(e.open)} positioning={{}}>
       <HoverCard.Trigger asChild>
         <Box>
-        <NumberInput.Root
-          value={row.strike}
-          min={0}
-          step={0.1}
-          maxW="130px"
-          minW="80px"
-          onValueChange={async (newValue) => {
-            setRows((prev) => {
-              const newRows = [...prev];
-              newRows[rowIndex] = { ...newRows[rowIndex], strike: newValue.value };
-              return newRows;
-            });
-          }}
-        >
-          <NumberInput.Control />
-          <NumberInput.Input />
-        </NumberInput.Root>
+          <NumberInput.Root
+            value={String(row.strike)}
+            min={0}
+            step={0.1}
+            maxW="130px"
+            minW="80px"
+            formatOptions={{
+              style: "currency",
+              currency: row.currency,
+              currencyDisplay: "symbol",
+              currencySign: "standard",
+            }}
+            onValueChange={async (newValue) => {
+              setRows((prev) => {
+                const newRows = [...prev];
+                newRows[rowIndex] = { ...newRows[rowIndex], strike: String(newValue.valueAsNumber) };
+                return newRows;
+              });
+            }}
+          >
+            <NumberInput.Control />
+            <NumberInput.Input />
+          </NumberInput.Root>
         </Box>
       </HoverCard.Trigger>
       <Portal>

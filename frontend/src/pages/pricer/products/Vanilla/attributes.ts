@@ -6,8 +6,9 @@ const tickers = [
   { value: "SPY", label: "S&P500" },
   { value: "AAPL", label: "Apple" },
   { value: "NVDA", label: "NVIDIA" },
-  { value: "CAC.PA", label: "CAC40" },
+  { value: "^FCHI", label: "CAC40" },
   { value: "TSLA", label: "Tesla" },
+  { value: "BNP.PA", label: "BNP" },  
 ];
 
 export const underlyingCollection = createListCollection({
@@ -33,7 +34,7 @@ export const typeCollection = createListCollection({
 
 export const COLUMNS: ColumnMeta[] = [
   { key: "type", label: "Type", values: typeCollection, defaultValue: "call" },
-  { key: "underlying", label: "Underlying", values: underlyingCollection, defaultValue: "CAC" },
+  { key: "underlying", label: "Underlying", values: underlyingCollection, defaultValue: "BNP.PA" },
   { key: "spot", label: "Spot"},
   { key: "currency", label: "Currency", disabled: true},
   { key: "strike", label: "Strike"},

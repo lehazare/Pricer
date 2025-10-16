@@ -1,4 +1,4 @@
-import { Box, HoverCard, Input, Portal, Text } from "@chakra-ui/react";
+import { Box, HoverCard, NumberInput, Portal, Text } from "@chakra-ui/react";
 import type { ColumnMeta, RowData } from "../types";
 import { useState, useMemo } from "react";
 
@@ -19,19 +19,32 @@ export default function PriceReturn({ col, rowIndex, rows }: Props) {
 
     const pct = (price / spot) * 100;
     return pct.toFixed(2);
-  }, [row.price, row.spot]); return (
+  }, [row.price, row.spot]); 
+  
+  if (!row.currency) {
+    return <NumberInput.Root size="sm" maxW="100px" minW="70px" disabled><NumberInput.Input /></NumberInput.Root>
+  }
+  
+  return (
     <HoverCard.Root size="sm" open={open} onOpenChange={(e) => setOpen(e.open)} positioning={{}}>
       <HoverCard.Trigger asChild>
         <Box>
-          <Input
-            bg="colors.bg"
-            color="colors.white"
-            size="sm"
-            maxW="100px"
-            minW="70px"
-            disabled
-            value={row[col.key]}
-          />
+          <NumberInput.Root
+                bg="colors.bg"
+                color="colors.white"
+                size="sm"
+                maxW="100px"
+                minW="70px"
+                disabled
+                value={String(row[col.key])}
+                formatOptions={{
+                  style: "currency",
+                  currency: row.currency,
+                  currencyDisplay: "symbol",
+                  currencySign: "standard",
+                }}>
+                <NumberInput.Input />
+              </NumberInput.Root>
         </Box>
       </HoverCard.Trigger>
       <Portal>
