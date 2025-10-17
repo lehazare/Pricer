@@ -8,7 +8,8 @@ def get_bond_from_cur(symbol: str) -> string:
             case "USD":
                 return "^TNX"
             case "EUR":
-                return "FR10Y.GBOND"
+                return "^TNX"
+                #return "FR10Y.GBOND"
             case "GBP":
                 return "UK10Y.GBOND"
             case _:
