@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace SchedulingAPI;
+namespace SchedulingLibrary;
 
 public static class BusinessDayCalculator
 {

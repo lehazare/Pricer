@@ -7,9 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Carter" Version="8.2.1" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.13"/>
         <PackageReference Include="Nager.Date" Version="2.9.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SchedulingLibrary\SchedulingLibrary.csproj" />
     </ItemGroup>
 
 </Project>
