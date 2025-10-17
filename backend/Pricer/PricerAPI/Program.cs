@@ -1,3 +1,6 @@
+using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Any;
 using PricingLibrary;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,12 +35,32 @@ app.MapHealthChecks("/health");
 
 app.UseHttpsRedirection();
 
-app.MapPost("/PriceWithBlackScholes", BlackScholesEngine.CalculateVanillaPrice)
+app.MapPost("/PriceWithBlackScholes", ([FromBody] JsonElement optionDescriptor) => (PriceGenericOption.PriceWithBlackScholes(optionDescriptor)))
     .WithName("PriceWithBlackScholes")
-    .WithOpenApi();
+    .WithOpenApi(operation =>
+    {
+        if (operation.RequestBody != null &&
+            operation.RequestBody.Content.TryGetValue("application/json", out var mediaType))
+        {
+            mediaType.Example = new OpenApiString("{\n  \"S0\": 100.0,\n  \"K\": 105.0,\n  \"T\": 1.0,\n  \"R\": 0.05,\n  \"Sigma\": 0.2,\n  \"IsCall\": true,\n  \"type\": \"vanilla\"\n}");
+        }
+        return operation;
+    });
 
-app.MapPost("/PriceWithMonteCarlo", PriceGenericOption.PriceWithMonteCarlo)
+app.MapPost("/PriceWithMonteCarlo", ([FromBody] JsonElement optionDescriptor) =>
+    {
+        var result = PriceGenericOption.PriceWithMonteCarlo(optionDescriptor);
+        return Results.Ok(result);
+    })
     .WithName("GetPriceWithMonteCarlo")
-    .WithOpenApi();
+    .WithOpenApi(operation =>
+    {
+        if (operation.RequestBody != null &&
+            operation.RequestBody.Content.TryGetValue("application/json", out var mediaType))
+        {
+            mediaType.Example = new OpenApiString("{\n  \"S0\": 100.0,\n  \"K\": 105.0,\n  \"T\": 1.0,\n  \"R\": 0.05,\n  \"Sigma\": 0.2,\n  \"IsCall\": true,\n  \"type\": \"vanilla\"\n}");
+        }
+        return operation;
+    });
 
 app.Run();

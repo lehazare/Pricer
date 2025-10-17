@@ -4,15 +4,15 @@ namespace PricingLibrary;
 
 public class PriceGenericOption
 {
-    public static IResult PriceWithMonteCarlo([FromBody] JsonElement raw)
+    public static IResult PriceWithMonteCarlo([FromBody] JsonElement optionDescriptor)
     {
-        string? type = raw.GetProperty("type").GetString();
+        string? type = optionDescriptor.GetProperty("type").GetString();
     
         IProductDto? dto = type switch
         {
-            "vanilla" => raw.Deserialize<VanillaOptionDto>(),
-            "asian" => raw.Deserialize<AsianOptionDto>(),
-            "autocall" => raw.Deserialize<AutocallDto>(),
+            "vanilla" => optionDescriptor.Deserialize<VanillaOptionDto>(),
+            "asian" => optionDescriptor.Deserialize<AsianOptionDto>(),
+            "autocall" => optionDescriptor.Deserialize<AutocallDto>(),
             _ => throw new NotSupportedException("Unknown type")
         };
 
@@ -21,4 +21,21 @@ public class PriceGenericOption
 
         return Results.Ok(new { Price = Math.Round(price, 2, MidpointRounding.AwayFromZero)});
     }
+    
+    public static IResult PriceWithBlackScholes([FromBody] JsonElement optionDescriptor)
+    {
+        string? type = optionDescriptor.GetProperty("type").GetString();
+        
+         VanillaOptionDto? dto = type switch
+        {
+            "vanilla" => optionDescriptor.Deserialize<VanillaOptionDto>(),
+            _ => throw new NotSupportedException("Impossible to price a non-Vanilla Option with Black & Scholes")
+        };
+
+        VanillaOption? option = (VanillaOption)dto?.ToDomain()!;
+        double price = BlackScholesEngine.Run(option);
+
+        return Results.Ok(new { Price = Math.Round(price, 2, MidpointRounding.AwayFromZero)});
+    }
+    
 }

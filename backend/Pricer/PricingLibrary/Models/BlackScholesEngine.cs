@@ -9,7 +9,7 @@ public class BlackScholesEngine
         return Normal.CDF(0.0, 1.0, x);
     }
     
-    public static double CalculateVanillaPrice(VanillaOption input)
+    public static double Run(VanillaOption? input)
     {
         double d1 = (Math.Log(input.InitialPrice / input.Strike) + (input.RiskFreeRate + 0.5 * input.Volatility * input.Volatility) * input.Maturity)
                     / (input.Volatility * Math.Sqrt(input.Maturity));
