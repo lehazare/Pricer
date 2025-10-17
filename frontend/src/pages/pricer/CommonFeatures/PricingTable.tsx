@@ -47,8 +47,8 @@ export default function PricingTable({ columns }: Props) {
         }
 
         const data = await response.json();
-
-        newRows[idx] = { ...row, price: data.price };
+  
+        newRows[idx] = { ...row, price: data.value.price };
       }
 
       setRows(newRows);

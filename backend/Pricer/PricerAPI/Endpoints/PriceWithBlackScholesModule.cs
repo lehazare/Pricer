@@ -10,7 +10,11 @@ public class PriceWithBlackScholesModule : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/PriceWithBlackScholes", ([FromBody] JsonElement optionDescriptor) => (PriceGenericOption.PriceWithBlackScholes(optionDescriptor)))
+        app.MapPost("/PriceWithBlackScholes", ([FromBody] JsonElement optionDescriptor) =>
+            {
+                var result = (PriceGenericOption.PriceWithBlackScholes(optionDescriptor));
+                return Results.Ok(result);
+            })
             .WithName("PriceWithBlackScholes")
             .WithOpenApi(operation =>
             {
